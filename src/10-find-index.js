@@ -12,20 +12,20 @@
  *
  */
 function findIndex(array, value) {
-  let start = 0;
-  let finish = array.length - 1;
-  let requiredIndex;
-  while (start <= finish) {
-    requiredIndex = Math.floor((finish - start) / 2);
-    if (array[requiredIndex] === value) {
-      return requiredIndex;
-    }
-    if (array[requiredIndex] < value) {
-      start = requiredIndex + 1;
-    } else {
-      finish = requiredIndex - 1;
-    }
+  let first = 0;
+  let last = array.length - 1;
+  let find = 0;
+
+  while (first <= last) {
+    find = Math.floor((first + last) / 2);
+
+    if (array[find] === value) return find;
+
+    if (array[find] < value) {
+      first = find + 1;
+    } else last = find - 1;
   }
+
   return -1;
 }
 
