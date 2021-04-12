@@ -21,8 +21,74 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+function minesweeper(matrix) {
+  const result = matrix.map((el) => el.map(() => 0));
+
+  for (let i = 0; i < result.length; i++) {
+    for (let j = 0; j < result[i].length; j++) {
+      if (matrix[i][j] === true) {
+        if (i === 0 && j === 0) {
+          result[i][j + 1] += 1;
+          result[i + 1][j] += 1;
+          result[i + 1][j + 1] += 1;
+        }
+        if (i === 0 && j === result[i].length - 1) {
+          result[i][j - 1] += 1;
+          result[i + 1][j] += 1;
+          result[i + 1][j - 1] += 1;
+        }
+        if (i === result.length - 1 && j === 0) {
+          result[i][j + 1] += 1;
+          result[i - 1][j] += 1;
+          result[i - 1][j + 1] += 1;
+        }
+        if (i === result.length - 1 && j === result[i].length - 1) {
+          result[i][j - 1] += 1;
+          result[i - 1][j] += 1;
+          result[i - 1][j - 1] += 1;
+        }
+        if (i === 0 && j > 0 && j < result[i].length - 1) {
+          result[i][j - 1] += 1;
+          result[i][j + 1] += 1;
+          result[i + 1][j - 1] += 1;
+          result[i + 1][j] += 1;
+          result[i + 1][j + 1] += 1;
+        }
+        if (i === result.length - 1 && j > 0 && j < result[i].length - 1) {
+          result[i][j - 1] += 1;
+          result[i][j + 1] += 1;
+          result[i - 1][j - 1] += 1;
+          result[i - 1][j] += 1;
+          result[i - 1][j + 1] += 1;
+        }
+        if (i > 0 && i < result.length - 1 && j === 0) {
+          result[i - 1][j] += 1;
+          result[i + 1][j] += 1;
+          result[i - 1][j + 1] += 1;
+          result[i][j + 1] += 1;
+          result[i + 1][j + 1] += 1;
+        }
+        if (i > 0 && i < result.length - 1 && j === result[i].length - 1) {
+          result[i - 1][j] += 1;
+          result[i + 1][j] += 1;
+          result[i - 1][j - 1] += 1;
+          result[i][j - 1] += 1;
+          result[i + 1][j - 1] += 1;
+        }
+        if (i > 0 && i < result.length - 1 && j > 0 && j < result[i].length - 1) {
+          result[i - 1][j - 1] += 1;
+          result[i][j - 1] += 1;
+          result[i + 1][j - 1] += 1;
+          result[i - 1][j] += 1;
+          result[i + 1][j] += 1;
+          result[i - 1][j + 1] += 1;
+          result[i][j + 1] += 1;
+          result[i + 1][j + 1] += 1;
+        }
+      }
+    }
+  }
+  return result;
 }
 
 module.exports = minesweeper;
